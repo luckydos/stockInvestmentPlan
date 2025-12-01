@@ -42,7 +42,7 @@
 			font-family: 'Pretendard', sans-serif;
 			background-color: var(--bg-body);
 			margin: 0;
-			padding: 40px 20px;
+			padding: 40px 15px;
 			color: var(--text-main);
 		}
 
@@ -391,11 +391,23 @@
 			transition: width 0.5s ease;
 		}
 
+		/* 로딩 메시지 스타일 */
 		.loading-row td {
-			text-align: center;
-			color: #999;
-			padding: 60px;
+			/* 1. 위치 고정 및 영역 설정 */
+			position: sticky;
+			left: 0;          /* 시작점은 왼쪽 끝 */
+			width: 100vw;     /* [핵심] 화면 전체 너비(Viewport Width) 사용 */
+			max-width: 100%;  /* 부모 요소 넘치지 않게 제한 */
+
+			/* 2. 내용물 정렬 */
+			display: block;   /* 블록 요소로 변경하여 너비 적용 */
+			text-align: center; /* 텍스트 가로 중앙 정렬 */
+
+			/* 3. 여백 및 디자인 */
+			padding: 60px 0;
 			border: none;
+			color: #999;
+			box-sizing: border-box;
 		}
 
 		.spinner {
@@ -438,23 +450,29 @@
 			}
 
 			.toolbar {
-				flex-direction: column-reverse;
-				align-items: flex-start;
-				gap: 10px;
+				flex-direction: column;
+				align-items: stretch;
+				gap: 5px;
 				padding: 0;
-				margin-bottom: 10px;
+				margin-bottom: 5px;
 			}
 
 			.time-display {
 				width: 100%;
-				justify-content: center;
-				background: #fff;
+				justify-content: flex-end;
+				background: transparent;
+				border: none;
+				box-shadow: none;
+				padding: 2px 5px;
+				font-size: 12px;
+				color: #868e96;
 				margin-bottom: 0;
 			}
+			.time-display i{ font-size: 12px; color: #868e96; position: relative; top: 1px; }
 
 			.tabs-group {
 				width: 100%;
-				gap: 8px;
+				gap: 6px;
 			}
 
 			.tab-btn {
@@ -481,7 +499,7 @@
 			/* 기업명 말줄임(...) 처리 */
 			.stock-name {
 				display: block;          /* 너비를 적용하기 위해 블록 요소로 설정 */
-				max-width: 100px;        /* 글자가 이 너비를 넘어가면 자름 (조절 가능) */
+				max-width: 110px;        /* 글자가 이 너비를 넘어가면 자름 (조절 가능) */
 				white-space: nowrap;     /* 줄바꿈 금지 (한 줄로 표시) */
 				overflow: hidden;        /* 넘치는 텍스트 숨김 */
 				text-overflow: ellipsis; /* 잘린 부분에 '...' 표시 */
