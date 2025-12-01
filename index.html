@@ -7,6 +7,7 @@
 	<title>Stock Investment Plan</title>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"/>
 
 	<style>
 		:root {
@@ -96,8 +97,10 @@
 			transition: all 0.1s ease;
 			display: flex;
 			align-items: center;
-			gap: 8px;
+			justify-content: center; /* 가운데 정렬 확실하게 */
+			gap: 4px;
 			position: relative;
+			display: flex;
 		}
 
 		.tab-btn:hover {
@@ -120,8 +123,18 @@
 			box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.02);
 		}
 
-		.flag-icon {
-			font-size: 18px;
+		/* 국기 아이콘 스타일 조정 */
+		.fi {
+			font-size: 18px;     /* 국기 크기 */
+			margin-right: 6px;   /* 텍스트와의 간격 */
+			border-radius: 2px;  /* 국기 모서리 살짝 둥글게 */
+			box-shadow: 0 1px 2px rgba(0,0,0,0.1); /* 국기 입체감 */
+		}
+		
+		/* 탭 버튼 정렬 보정 */
+		.tab-btn {
+		/* 기존 코드 유지... */
+
 		}
 
 		/* 시간 표시 */
@@ -452,10 +465,10 @@
 		<div class="toolbar">
 			<div class="tabs-group">
 				<button class="tab-btn active" onclick="switchTab('korea')">
-					<span class="flag-icon">🇰🇷</span> 한국 주식
+					<span class="fi fi-kr"></span> 한국 주식
 				</button>
 				<button class="tab-btn" onclick="switchTab('usa')">
-					<span class="flag-icon">🇺🇸</span> 미국 주식
+					<span class="fi fi-us"></span> 미국 주식
 				</button>
 			</div>
 			<div class="time-display">
