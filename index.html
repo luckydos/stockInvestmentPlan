@@ -7,6 +7,7 @@
 	<title>Stock Investment Plan</title>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css" />
 
 	<style>
 		:root {
@@ -15,10 +16,15 @@
 			--text-main: #333333;
 			--text-sub: #666666;
 
-			--border-color: #dce1e6;
-			--input-bg: #f8f9fa;
+			/* [핵심] 모든 테두리 색상 완전 통일 */
+			--border-color: #e0e0e0;
+
+			/* 목표 입력란 배경색 (자연스러운 미색) */
+			--input-bg: #fcfcfc;
 			--input-text: #495057;
-			--header-bg: #f1f3f5;
+
+			/* 헤더 배경 */
+			--header-bg: #f8f9fa;
 
 			--color-up: #e31b23;
 			--color-down: #0051c7;
@@ -28,7 +34,7 @@
 			--badge-hold: #868e96;
 
 			--tab-active-text: #111;
-			--tab-inactive-bg: #e9ecef;
+			--tab-inactive-bg: #f1f3f5;
 			--tab-inactive-text: #999;
 		}
 
@@ -45,15 +51,12 @@
 			margin: 0 auto;
 		}
 
-		/* --- [수정] 헤더 영역 (Flex 적용) --- */
+		/* --- 헤더 --- */
 		.dashboard-header {
 			margin-bottom: 20px;
 			display: flex;
-			/* 좌우 정렬을 위해 Flexbox 사용 */
 			justify-content: space-between;
-			/* 양 끝으로 벌림 */
 			align-items: center;
-			/* 수직 중앙 정렬 */
 		}
 
 		.dashboard-title h2 {
@@ -64,7 +67,6 @@
 			letter-spacing: -0.5px;
 		}
 
-		/* [신규] 새로고침 버튼 스타일 */
 		.refresh-btn {
 			background-color: #fff;
 			border: 1px solid var(--border-color);
@@ -86,17 +88,11 @@
 			color: #2c3e50;
 			border-color: #b0b8c1;
 			transform: translateY(-1px);
-			/* 살짝 떠오르는 효과 */
 			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 		}
 
 		.refresh-btn:active {
 			transform: translateY(0);
-			box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
-		}
-
-		.refresh-btn i {
-			font-size: 14px;
 		}
 
 		/* --- 툴바 (탭 영역) --- */
@@ -106,20 +102,22 @@
 			align-items: flex-end;
 			padding: 0;
 			margin-bottom: -1px;
+			/* 탭과 본문 연결 */
 			position: relative;
 			z-index: 10;
 		}
 
 		.tabs-group {
 			display: flex;
-			gap: 4px;
+			gap: 0;
+			/* 탭 사이 간격 제거하여 연결감 강화 */
 		}
 
 		.tab-btn {
 			padding: 12px 30px;
 			border: 1px solid transparent;
 			border-bottom: none;
-			background: #e9ecef;
+			background: var(--tab-inactive-bg);
 			border-radius: 12px 12px 0 0;
 			font-size: 15px;
 			font-weight: 600;
@@ -130,22 +128,28 @@
 			align-items: center;
 			gap: 8px;
 			position: relative;
+			margin-right: 4px;
+			/* 탭 간격 */
 		}
 
 		.tab-btn:hover {
-			background-color: #dee2e6;
+			background-color: #e9ecef;
 			color: var(--text-main);
 		}
 
+		/* [핵심] 활성 탭 디자인 */
 		.tab-btn.active {
 			background-color: var(--bg-card);
 			color: var(--tab-active-text);
 			font-weight: 700;
+			/* 테두리 색상 통일 */
 			border: 1px solid var(--border-color);
+			/* 하단을 흰색으로 덮어서 뚫린 효과 */
 			border-bottom: 1px solid var(--bg-card);
 			z-index: 20;
 			padding-bottom: 13px;
-			box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.02);
+			/* 높이 보정 */
+			box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.02);
 		}
 
 		.flag-icon {
@@ -171,12 +175,14 @@
 			color: #2c3e50;
 		}
 
-		/* --- 컨텐츠 박스 --- */
+		/* --- 컨텐츠 박스 (테이블 감싸는 Div) --- */
 		.content-section {
 			display: none;
 			background: var(--bg-card);
+			/* 외곽 테두리 통일 */
 			border: 1px solid var(--border-color);
-			border-radius: 0 16px 16px 16px;
+			border-radius: 0 12px 12px 12px;
+			/* 왼쪽 위 직각 */
 			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 			padding: 20px;
 			animation: fadeIn 0.2s ease-out;
@@ -204,6 +210,7 @@
 		.table-responsive {
 			overflow-x: auto;
 			width: 100%;
+			/* 테이블 자체 외곽선 */
 			border: 1px solid var(--border-color);
 			border-radius: 8px;
 		}
@@ -221,6 +228,7 @@
 			font-weight: 700;
 			padding: 16px 12px;
 			text-align: center;
+			/* 테두리 색상 통일 */
 			border-bottom: 1px solid var(--border-color);
 			border-right: 1px solid var(--border-color);
 			white-space: nowrap;
@@ -231,13 +239,10 @@
 			letter-spacing: -0.3px;
 		}
 
-		th:last-child {
-			border-right: none;
-		}
-
 		td {
 			padding: 14px 12px;
-			border-bottom: 1px solid #f1f3f5;
+			/* 내부 선 색상 통일 */
+			border-bottom: 1px solid var(--border-color);
 			border-right: 1px solid var(--border-color);
 			vertical-align: middle;
 			text-align: right;
@@ -246,6 +251,8 @@
 			color: #333;
 		}
 
+		/* 마지막 선 처리 */
+		th:last-child,
 		td:last-child {
 			border-right: none;
 		}
@@ -258,18 +265,22 @@
 			background-color: #f8f9fa !important;
 		}
 
+		/* [수정] 목표값 컬럼 자연스럽게 */
 		.input-val {
 			background-color: var(--input-bg) !important;
 			color: var(--input-text);
-			border-right: 1px solid var(--border-color);
 			text-align: center;
+			/* 테두리는 다른 셀과 동일하게 유지 */
+			border-right: 1px solid var(--border-color);
 		}
 
 		th.input-val {
 			background-color: #e9ecef;
+			/* 헤더만 살짝 다르게 */
 			color: #333;
 		}
 
+		/* 고정 컬럼 (기업명) */
 		th:first-child,
 		td:first-child {
 			position: sticky;
@@ -298,11 +309,12 @@
 		.stock-code {
 			font-size: 12px;
 			color: #adb5bd;
-			margin-top: 4px;
+			margin-top: 3px;
 			display: block;
 			font-weight: 400;
 		}
 
+		/* 배지 */
 		.badge {
 			display: inline-block;
 			padding: 6px 14px;
@@ -312,7 +324,6 @@
 			color: white;
 			text-align: center;
 			min-width: 54px;
-			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 		}
 
 		.badge.buy {
@@ -376,7 +387,7 @@
 
 		.bar-fill {
 			height: 100%;
-			border-radius: 3px;
+			border-radius: 4px;
 			transition: width 0.5s ease;
 		}
 
@@ -393,7 +404,7 @@
 			height: 24px;
 			border: 3px solid rgba(0, 0, 0, 0.1);
 			border-radius: 50%;
-			border-top-color: #2c3e50;
+			border-top-color: var(--tab-active-text);
 			animation: spin 1s ease-in-out infinite;
 			vertical-align: middle;
 			margin-right: 10px;
@@ -408,33 +419,28 @@
 		@media (max-width: 768px) {
 			.container {
 				margin: 0;
-				border-radius: 0;
-				box-shadow: none;
-				background: transparent;
 			}
 
 			.dashboard-header {
-				flex-direction: row;
-				justify-content: space-between;
-				align-items: center;
+				flex-direction: column;
+				align-items: stretch;
+				gap: 15px;
+				margin-bottom: 20px;
 			}
 
-			/* 모바일 헤더 정렬 */
 			.dashboard-title h2 {
-				font-size: 20px;
+				font-size: 22px;
 			}
 
 			.refresh-btn {
-				padding: 8px 12px;
-				font-size: 13px;
+				width: 100%;
+				justify-content: center;
 			}
-
-			/* 모바일 버튼 크기 */
 
 			.toolbar {
 				flex-direction: column-reverse;
 				align-items: flex-start;
-				gap: 12px;
+				gap: 10px;
 				padding: 0;
 				margin-bottom: 10px;
 			}
@@ -457,18 +463,36 @@
 				border-radius: 12px;
 				border: 1px solid var(--border-color);
 				background: #fff;
+				margin-right: 0;
 			}
 
 			.tab-btn.active {
 				background: #2c3e50;
 				color: #fff;
 				border: none;
+				padding-bottom: 12px;
 			}
 
 			.content-section {
 				border-radius: 16px;
+				padding: 0;
 			}
 
+			/* 기업명 말줄임(...) 처리 */
+			.stock-name {
+				display: block;          /* 너비를 적용하기 위해 블록 요소로 설정 */
+				max-width: 100px;        /* 글자가 이 너비를 넘어가면 자름 (조절 가능) */
+				white-space: nowrap;     /* 줄바꿈 금지 (한 줄로 표시) */
+				overflow: hidden;        /* 넘치는 텍스트 숨김 */
+				text-overflow: ellipsis; /* 잘린 부분에 '...' 표시 */
+			}
+
+			.table-responsive {
+				border-radius: 16px;
+				border: 1px solid var(--border-color);
+			}
+
+			th:first-child,
 			td:first-child {
 				padding-left: 15px;
 			}
@@ -481,21 +505,20 @@
 	<div class="container">
 		<div class="dashboard-header">
 			<div class="dashboard-title">
-				<h2>Stock Investment Plan <span>포트폴리오 현황</span></h2>
+				<h2>Stock Investment Plan</h2>
 			</div>
 			<button class="refresh-btn" onclick="location.reload()">
-				<i class="fas fa-rotate-right"></i>
-				새로고침
+				<i class="fas fa-rotate-right"></i> 새로고침
 			</button>
 		</div>
 
 		<div class="toolbar">
 			<div class="tabs-group">
 				<button class="tab-btn active" onclick="switchTab('korea')">
-					<span class="flag-icon">🇰🇷</span> 한국 주식
+					<span class="fi fi-kr"></span> 한국 주식
 				</button>
 				<button class="tab-btn" onclick="switchTab('usa')">
-					<span class="flag-icon">🇺🇸</span> 미국 주식
+					<span class="fi fi-us"></span> 미국 주식
 				</button>
 			</div>
 			<div class="time-display">
@@ -562,14 +585,8 @@
 	</div>
 
 	<script>
-		// ============================================================
-		// 1. [설정] Google Apps Script URL
-		// ============================================================
 		const API_URL = "https://script.google.com/macros/s/AKfycbz80x6AyIftaDyqX68cyv3spp2x8gg14Rq1gPnb8NSToi0LInPgOkBbn2lflJSkd_8u/exec";
 
-		// ============================================================
-		// 2. [설정] 종목 및 목표 설정
-		// ============================================================
 		const koreaStocks = [
 			{ name: "기아", code: "000270", targetDiv: 6.00, targetPer: null },
 			{ name: "삼성증권", code: "016360", targetDiv: 5.00, targetPer: null },
@@ -583,12 +600,9 @@
 			{ name: "Coca-Cola", code: "KO", targetDiv: 3.00, targetPer: null },
 			{ name: "Realty Income", code: "O", targetDiv: 6.00, targetPer: null },
 			{ name: "Pfizer", code: "PFE", targetDiv: 7.00, targetPer: null },
-			{ name: "TLT ETF", code: "TLT", targetDiv: 4.30, targetPer: null }
+			{ name: "iShares 20+ Year Treasury Bond ETF", code: "TLT", targetDiv: 4.30, targetPer: null }
 		];
 
-		// ============================================================
-		// 3. 로직 함수
-		// ============================================================
 		function calculateTarget(data, config) {
 			try {
 				if (config.targetDiv) {
@@ -634,19 +648,15 @@
 
 			try {
 				const rowDataList = await Promise.all(promises);
-
 				const validData = rowDataList.find(d => !d.error && d.time);
 				if (validData) {
 					const timeStr = validData.time;
 					window[`time_${country}`] = timeStr;
-					const activeBtnText = document.querySelector('.tab-btn.active').innerText;
-					const isKoreaTab = activeBtnText.includes("한국");
-					if ((isKorea && isKoreaTab) || (!isKorea && !isKoreaTab)) {
+					if (document.querySelector('.tab-btn.active').innerText.includes(isKorea ? "한국" : "미국")) {
 						document.getElementById('globalTime').innerText = timeStr;
 					}
 				}
 				renderTableBody(tbody, rowDataList, isKorea);
-
 			} catch (error) {
 				tbody.innerHTML = `<tr><td colspan="16" style="text-align:center;">데이터 로드 실패</td></tr>`;
 			}
