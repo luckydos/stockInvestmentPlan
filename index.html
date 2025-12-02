@@ -637,9 +637,11 @@
 		}
 
 		body.force-pc table {
-			/* PC 뷰에서는 좁게 찌그러지지 않도록 최소 너비를 줍니다 */
-			min-width: 1100px; 
+			/* PC 뷰에서는 좁게 찌그러지지 않도록 너비를 고정 */
+			width: 1600px !important;
+			min-width: 1600px !important;
 		}
+		body.force-pc table colgroup col:first-child { width: 8% !important; }
 	</style>
 </head>
 
