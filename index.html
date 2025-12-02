@@ -615,7 +615,8 @@
 		}
 
 		body.force-pc {
-			overflow-x: hidden;
+			overflow-x: auto; /* 바디 스크롤 허용 (필요시) */
+			background-color: var(--bg-body);
 		}
 
 		body.force-pc .container {
@@ -624,21 +625,21 @@
 			padding: 0 5px;
 		}
 
-		body.force-pc .pc-view {
-			display: block !important;
-		}
+		body.force-pc .pc-view { display: block !important; }
 
-		body.force-pc .mobile-view {
-			display: none !important;
-		}
+		body.force-pc .mobile-view { display: none !important; }
 
 		body.force-pc .table-responsive {
 			display: block;
 			width: 100%;
-			overflow: hidden;
+			overflow-x: auto; /* 가로 스크롤 생성 */
+			-webkit-overflow-scrolling: touch; /* 부드러운 스크롤 */
 		}
 
-		/* PC강제모드에서도 스크롤제거 */
+		body.force-pc table {
+			/* PC 뷰에서는 좁게 찌그러지지 않도록 최소 너비를 줍니다 */
+			min-width: 1100px; 
+		}
 	</style>
 </head>
 
